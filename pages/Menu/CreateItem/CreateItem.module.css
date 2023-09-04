@@ -1,0 +1,178 @@
+.itemImage{
+    display: inline-block;
+    }
+    .itemDetailsContainer{
+        display: inline-block;
+       max-width: 50%;
+    }
+    .itemContainer{
+        width: 60%;
+       position: relative;
+       top: 50%;
+       left: 30%;
+    
+    }
+    @media (max-width: 834px) {
+        .itemContainer{
+            width: 100%;
+    
+        
+        }   
+    }
+    .itemName{
+        display: block;
+        text-align: center;
+        font-family: 'Quicksand';
+        font-weight: 800;
+        font-size: 60px;
+    margin-bottom: 20px;
+    
+    }
+    .itemDescription{
+        font-family: 'Quicksand';
+        font-weight: 500;
+        font-size: 40px;
+        max-width: 100%;
+        inline-size: 100%;
+        overflow-wrap: break-word;
+        display: block;
+        margin-bottom:30px ;
+    
+    }
+    .placeOrderBtn{
+        background-color: #FCB44D;
+        font-family: 'Quicksand';
+        font-size: 35px;
+        position: relative;
+        left:20%;
+        color: white;
+        font-weight: 700;
+        padding: 10px;
+        padding-left: 25px;
+        padding-right: 25px;
+        border-radius: 30px;
+    }
+    .placeOrderBtn:hover{
+        cursor: pointer;
+        opacity: .9;
+    }
+    .alertCover{
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        background-color: black;
+        opacity: .75;
+        z-index: 1;
+    }
+    .paymentAlert{
+        position: fixed;
+        top: 15%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: white;
+        z-index: 2;
+        width: 500px;
+        height: 400px;
+    }
+    .placeOrderTitle{
+        font-family: 'Quicksand';
+        font-size: 30px;
+        font-weight: 700;
+        margin: 10px;
+        display: block;
+    
+    }
+    .cancelButton{
+        font-family: 'Quicksand';
+        font-size: 35px;
+        font-weight: 700;
+        margin: 10px;
+        display: block;
+        float: right; 
+    
+    }
+    
+    .cancelButton:hover{
+        cursor: pointer;
+    }
+    .unavailableBtn{
+        background-color: #7a7a7a;
+        font-family: 'Quicksand';
+        font-size: 35px;
+        position: relative;
+        left:20%;
+        color: white;
+        font-weight: 700;
+        padding: 10px;
+        padding-left: 25px;
+        padding-right: 25px;
+        border-radius: 30px;
+    }
+.inputBox{
+    display: block;
+    width: 90%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 25px;
+    margin: 10px;
+    outline: none;
+    border-radius: 2px;
+    border: 1px solid rgb(88, 88, 88);
+    height: 35px;
+    font-family: 'Quicksand';
+}
+.inputBox:focus{
+    outline: none;
+}
+.nav{
+    display: block;
+    padding: 5px;
+    border-bottom: solid black 1px;
+    margin: 0;
+  }
+  .navTitle{
+    font-family: 'Quicksand', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    margin-left: 15px;
+    margin-bottom: 0px;
+    display: inline-block;
+  }
+  .container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+  }
+  .itemLabel{
+    display: block;
+    width: 90%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Quicksand';
+    font-weight: 500;
+  }
+  .itemBtn{
+    outline: none;
+    border: none;
+    background-color: black;
+    font-family: 'Quicksand';
+    color: white;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 45px;
+    width: 100px;
+    border-radius: 5px;
+  }
+.itemBtn:hover{
+    cursor: pointer;
+    opacity: .75;
+
+}
+.nav:hover{
+    cursor: pointer;
+  }
