@@ -8,12 +8,12 @@ import Landing from './landing/Landing';
 const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   return (
-    <>
+    <div >
     <div className={styles.nav} onClick={()=>{window.location.href="/"}}>
 <Image src={icon}></Image>
 <span className={styles.navTitle}>Menu Master</span>
     </div>
      <Landing></Landing>
-    </>
+     </div>
   )
 }

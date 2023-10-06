@@ -38,7 +38,7 @@ useEffect(() => {
     get(child(dbRef, `admins`)).then((snapshot) => {
       if (snapshot.exists()) {
         var admins = snapshot.val();
-        admins.forEach(admin=>{
+        Object.values(admins).forEach(admin=>{
           if(session.user.email === admin.email){
             setIsAdmin(true);
           }

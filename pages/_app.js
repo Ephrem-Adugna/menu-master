@@ -15,8 +15,11 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 export default function App({ Component, pageProps }) {
-  return(<SessionProvider session={pageProps.session}>
+  return(
+  <div className='container'>
+  <SessionProvider session={pageProps.session}>
    <Component {...pageProps} />
   </SessionProvider>
+  </div>
   )
 }

@@ -16,13 +16,11 @@ const ItemDetails = (props) => {
     currency: 'USD',
 });
 const router = useRouter();
-const [seed, setSeed] = useState(1);
-       const reset = () => {
-            setSeed(Math.random());
-        }
+
 function getItemDetails(){
 
   const dbRef = ref(getDatabase());
+
   get(child(dbRef, `menu/${props?.id}`)).then((snapshot) => {
     if (snapshot.exists()) {
       var menuItems = snapshot.val();
@@ -37,7 +35,7 @@ useEffect(() => {
   if(!props){
     props.goToMenu();
   }
-
+console.log(session)
  
  getItemDetails();
 }, [])
@@ -49,7 +47,7 @@ if(itemDetails){
 <span className={styles.cancelButton} onClick={()=>{setAlertActive(false);}}>X</span>
 
 <span className={styles.placeOrderTitle}>Place Order</span>
-<Payment key={seed} cost={itemDetails.itemPrice} ></Payment>
+<Payment  cost={itemDetails.itemPrice} itemId={props?.id} email={session.user.email} name={session.user.name}></Payment>
 
   </div>
 }
