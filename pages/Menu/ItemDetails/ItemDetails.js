@@ -47,7 +47,7 @@ if(itemDetails){
 <span className={styles.cancelButton} onClick={()=>{setAlertActive(false);}}>X</span>
 
 <span className={styles.placeOrderTitle}>Place Order</span>
-<Payment  cost={itemDetails.itemPrice} itemId={props?.id} email={session.user.email} name={session.user.name}></Payment>
+<Payment  cost={itemDetails.itemPrice} itemId={props?.id} email={session?.user?.email} name={session?.user?.name}></Payment>
 
   </div>
 }

@@ -98,7 +98,7 @@ getMenu();
   <div className={styles.menuItemsContainer}>
   {Object.values(menuItems).map((menuItem, id)=>  (
     
-<div className={`${styles.menuItem} ${ !menuItem.available && styles.disabled}`} onClick={()=>{if(!isAdmin){goToItemDetails(Object.keys(menuItems)[id])}}}>
+<div key={id} className={`${styles.menuItem} ${ !menuItem.available && styles.disabled}`} onClick={()=>{if(!isAdmin){goToItemDetails(Object.keys(menuItems)[id])}}}>
 <Image className={styles.itemImage} src={menuItem.itemFile} width={100} height={150} alt='foodimg'/>
 <span className={styles.itemName}>{menuItem.itemName}</span>
 {isAdmin && <span className={styles.itemMarkUnavailable} onClick={()=>{toggleAvailable(menuItem, Object.keys(menuItems)[id])}}>Mark {menuItem.available && <span>Unavailable</span>}{!menuItem.available && <span>Available</span>}</span>}

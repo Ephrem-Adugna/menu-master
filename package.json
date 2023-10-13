@@ -1,8 +1,11 @@
 {
   "name": "menu-master",
   "version": "0.1.0",
+  "homepage": "https://ephrem-adugna.github.io/menu-master",
   "private": true,
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -22,5 +25,8 @@
     "next-auth": "^4.23.1",
     "react": "18.2.0",
     "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.0.0"
   }
 }

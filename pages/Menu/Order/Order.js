@@ -12,7 +12,7 @@ import { useRouter } from 'next/router';
 // import nodemailer from 'nodemailer';
 // import { Email } from './Email';
 export default function Order() {
-    const [orderId, setOrderId] = useState(sessionStorage.getItem("order"))
+    const [orderId, setOrderId] = useState(typeof window !== "undefined" && window.sessionStorage.getItem("order"))
     const { data: session, status } = useSession();
     const [isAdmin, setIsAdmin] = useState(false)
     const [orders, setOrders] = useState([]);
@@ -135,7 +135,7 @@ if (status === "authenticated" && isAdmin) {
             </thead>
             <tbody>
               {Object.values(orders).map((order, id)=>  ( 
-                 <tr>
+                 <tr key={id}>
                     <td>{order.itemName}</td>
                     <td>{order.code}</td>
                     <td>{order.timestamp}</td>
