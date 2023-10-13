@@ -110,6 +110,8 @@ validatePhoneNumber(phoneNumber).then(response=>{
     }
     setPhoneNumberTo(phoneNumber + mail);
     setPhoneNumberDone(true);
+}).catch(e=>{
+    console.error(e)
 })
       }
     useEffect(() => {
