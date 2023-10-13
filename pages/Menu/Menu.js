@@ -64,9 +64,8 @@ useEffect(() => {
             console.error(error);
           });        }
       });
-      if(!isAdmin){
       getMenu();
-      }
+
 
     } 
   }).catch((error) => {
