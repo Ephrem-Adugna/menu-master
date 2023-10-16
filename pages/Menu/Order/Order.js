@@ -9,6 +9,7 @@ import checkMark from '../../../assets/checkMark.png';
 import { render } from '@react-email/render';
 import { sendMail } from '@/services/mailService';
 import { useRouter } from 'next/router';
+import NotificationButton from './NotificationButton/NotificationButton';
 // import nodemailer from 'nodemailer';
 // import { Email } from './Email';
 export default function Order() {
@@ -153,6 +154,7 @@ if (status === "authenticated" && isAdmin) {
 if(status === "authenticated" && orderId){
     return (
         <>
+        <NotificationButton></NotificationButton>
           <div className={styles.nav} onClick={()=>{window.location.href="/"}}>
 <Image src={icon}></Image>
 <span className={styles.navTitle}>Menu Master</span>

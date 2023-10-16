@@ -2,7 +2,8 @@ import '@/styles/globals.css'
 import { initializeApp } from 'firebase/app';
 import { getDatabase } from "firebase/database";
 import { Provider, SessionProvider } from 'next-auth/react'
-
+import { getMessaging } from "firebase/messaging";
+import { useEffect } from 'react';
 const firebaseConfig = {
   apiKey: "AIzaSyB8tDOtxUpEKFHhWmmRTDgnhTXSrmMVO0Q",
   authDomain: "bernardmenu-6a8a5.firebaseapp.com",
@@ -12,9 +13,13 @@ const firebaseConfig = {
   messagingSenderId: "935339817694",
   appId: "1:935339817694:web:2a17161978ca91e3b4a04f"
 };
-const app = initializeApp(firebaseConfig);
 
+const app = initializeApp(firebaseConfig);
 export default function App({ Component, pageProps }) {
+  useEffect(()=>{
+const messaging = getMessaging(app);
+ 
+  }, [])
   return(
   <div className='container'>
   <SessionProvider session={pageProps.session}>
