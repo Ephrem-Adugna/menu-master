@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import Head from 'next/head'
+import { sendNotification } from '@/services/sendNotification'
 
 const base64ToUint8Array = base64 => {
   const padding = '='.repeat((4 - (base64.length % 4)) % 4)
@@ -26,7 +27,7 @@ const NotificationButton = () => {
         reg.pushManager.getSubscription().then(sub => {
           if (sub && !(sub.expirationTime && Date.now() > sub.expirationTime - 5 * 60 * 1000)) {
             setSubscription(sub)
-            setIsSubscribed(true)
+            setIsSubscribed(true);
           }
         })
         setRegistration(reg)
@@ -39,8 +40,8 @@ const NotificationButton = () => {
     const sub = await registration.pushManager.subscribe({
       userVisibleOnly: true,
       applicationServerKey: base64ToUint8Array(process.env.NEXT_PUBLIC_WEB_PUSH_PUBLIC_KEY)
-    })
-    // TODO: you should call your API to save subscription data on server in order to send web push notification from server
+    });
+
     setSubscription(sub)
     setIsSubscribed(true)
     console.log('web push subscribed!')
@@ -63,15 +64,12 @@ const NotificationButton = () => {
       return
     }
 
-    await fetch('/api/notification', {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify({
-        subscription
-      })
-    })
+    sendNotification(subscription).then(response=>{
+      console.log(response);
+    }).catch(e=>{
+      console.error(e);
+    });
+  
   }
 
   return (
