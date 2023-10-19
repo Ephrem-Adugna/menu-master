@@ -2,7 +2,6 @@ import '@/styles/globals.css'
 import { initializeApp } from 'firebase/app';
 import { getDatabase } from "firebase/database";
 import { Provider, SessionProvider } from 'next-auth/react'
-import { getMessaging } from "firebase/messaging";
 import { useEffect } from 'react';
 const firebaseConfig = {
   apiKey: "AIzaSyB8tDOtxUpEKFHhWmmRTDgnhTXSrmMVO0Q",
@@ -17,7 +16,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export default function App({ Component, pageProps }) {
   useEffect(()=>{
-const messaging = getMessaging(app);
  
   }, [])
   return(

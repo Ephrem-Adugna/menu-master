@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { getMessaging, getToken, onMessage  } from "firebase/messaging";
+
 import {
     PayPalScriptProvider,
     PayPalButtons,
@@ -21,6 +23,8 @@ const [phoneNumberDone, setPhoneNumberDone] = useState(false);
 const [error, setErorr] = useState(false);
 const [phoneNumber, setPhoneNumber] = useState("");
 const [phoneNumberTo, setPhoneNumberTo] = useState("");
+const [regToken, setRegToken] = useState("");
+
     function getCurrentTimeIn12HourFormat() {
         const now = new Date();
         let hours = now.getHours();
@@ -38,7 +42,7 @@ const [phoneNumberTo, setPhoneNumberTo] = useState("");
       
         return currentTime;
       }
-    function createOrder(){
+    function createOrder(regToken){
         const db = getDatabase();
       
         const newPostKey = push(child(ref(db), 'orders')).key;
@@ -53,7 +57,7 @@ const [phoneNumberTo, setPhoneNumberTo] = useState("");
              if (snapshot.exists()) {
                var item = snapshot.val();
                var itemName = item.itemName;  
-               updates['/orders/' + newPostKey] = {itemName: itemName, code: code, item: id, customerEmail: email, customerName: name, timestamp: getCurrentTimeIn12HourFormat(), status: 0, phoneNumber: phoneNumberTo };
+               updates['/orders/' + newPostKey] = {itemName: itemName, code: code, item: id, customerEmail: email, customerName: name, timestamp: getCurrentTimeIn12HourFormat(), status: 0, phoneNumber: phoneNumberTo, regToken: regToken };
                update(ref(db), updates);                 
              } 
            }).catch((error) => {

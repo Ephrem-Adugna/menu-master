@@ -9,7 +9,6 @@ import checkMark from '../../../assets/checkMark.png';
 import { render } from '@react-email/render';
 import { sendMail } from '@/services/mailService';
 import { useRouter } from 'next/router';
-import NotificationButton from './NotificationButton/NotificationButton';
 import NotificationButtonFirebase from './NotificationButton/NotificationButtonFirebase';
 // import nodemailer from 'nodemailer';
 // import { Email } from './Email';
@@ -107,8 +106,8 @@ router.push('/')
     console.error(error);
   });
     }, []);
-    function sendOrderDone(code, number, name){
-      sendMail(number, `Your order for ${name} is done! Code: ${code}`, "Menu Master").then(response=>{
+    function sendOrderDone(code, number, name, regToken){
+      sendMail(number, `Your order for ${name} is done! Code: ${code}`, "Menu Master", regToken).then(response=>{
        if( response.data.success)
        {
         alert("Message Sent")
@@ -117,6 +116,28 @@ router.push('/')
         console.error(e)
       })
     }
+  //   function setUpNotifications(){
+  //     const messaging = getMessaging();
+  //     getToken(messaging, {vapidKey: "BKy2Rm_Ts8PmYAaHAePkd8ngCIko4o90QkaDzpknv5bSYSXH1iO7o9fVyJ7C1Sl8QwS5aWoS3ddu2mCUZ8m5ZjU"}).then((currentToken) => {
+  //       if (currentToken) {
+  //        setRegToken(currentToken);
+  //        createOrder(currentToken);
+  //       } else {
+  //         // Show permission request UI
+  //         console.log('No registration token available. Request permission to generate one.');
+  //         // ...
+  //       }
+  //     }).catch((err) => {
+  //       console.log('An error occurred while retrieving token. ', err);
+  //       // ...
+  //     });
+  //     onMessage(messaging, (payload) => {
+  //       console.log('Message received. ', payload);
+  //     });
+      
+   
+  
+  // }
 if (status === "authenticated" && isAdmin) {
 
   return (
@@ -141,7 +162,7 @@ if (status === "authenticated" && isAdmin) {
                     <td>{order.itemName}</td>
                     <td>{order.code}</td>
                     <td>{order.timestamp}</td>
-                    <td onClick={()=>{sendOrderDone(order.code, order.phoneNumber, order.itemName)}}><Image className={styles.sendDoneButton} width={50} height={75} src={checkMark}></Image></td>
+                    <td onClick={()=>{sendOrderDone(order.code, order.phoneNumber, order.itemName, order.regToken)}}><Image className={styles.sendDoneButton} width={50} height={75} src={checkMark}></Image></td>
                     <td ><Image className={styles.sendDoneButton} width={50} height={75} src={checkMark}></Image></td>
                 </tr>
                 
@@ -155,7 +176,7 @@ if (status === "authenticated" && isAdmin) {
 if(status === "authenticated" && orderId){
     return (
         <>
-        <NotificationButtonFirebase></NotificationButtonFirebase>
+        <NotificationButtonFirebase orderId={orderId}></NotificationButtonFirebase>
           <div className={styles.nav} onClick={()=>{window.location.href="/"}}>
 <Image src={icon}></Image>
 <span className={styles.navTitle}>Menu Master</span>
