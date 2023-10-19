@@ -2,7 +2,11 @@ import '@/styles/globals.css'
 import { initializeApp } from 'firebase/app';
 import { getDatabase } from "firebase/database";
 import { Provider, SessionProvider } from 'next-auth/react'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import Image from 'next/image'
+import icon from '../assets/Menu Master.gif';
+import iconImg from '../assets/Menu Master.png';
+
 const firebaseConfig = {
   apiKey: "AIzaSyB8tDOtxUpEKFHhWmmRTDgnhTXSrmMVO0Q",
   authDomain: "bernardmenu-6a8a5.firebaseapp.com",
@@ -15,14 +19,25 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export default function App({ Component, pageProps }) {
+  const [vidDone, setVidDone] = useState(false);
   useEffect(()=>{
- 
+ setTimeout(()=>{
+setVidDone(true)
+ },5000)
   }, [])
   return(
   <div className='container'>
-  <SessionProvider session={pageProps.session}>
-   <Component {...pageProps} />
-  </SessionProvider>
+   {!vidDone &&  
+<Image className='splashVideo' src={icon}></Image>
+   }
+   {!vidDone &&
+<Image className='splashImg' src={iconImg}></Image>
+   }
+      <div style={{visibility: `${!vidDone && 'hidden' || 'visible'}`}}>
+   <SessionProvider session={pageProps.session}>
+    <Component {...pageProps} />
+    </SessionProvider>
+    </div>
   </div>
   )
 }

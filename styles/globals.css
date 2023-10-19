@@ -5,3 +5,40 @@ html, body{
   height: 100vh;
   overflow-y: auto;
 }
+.splashVideo{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 100vw;
+  height: auto;
+}
+.splashImg{
+  display: none;
+}
+@keyframes moveIn {
+  from {top: 100%}
+  to {top: 50%;}
+}
+@keyframes moveIn {
+  0% {top: 100%}
+  50% {top: 50%;}
+  100% {top: -100%;
+  display: none;}
+}
+@media (min-width: 670px) {
+  .splashVideo{
+    display: none;
+  }
+  .splashImg{
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 90%;
+    height: auto;
+    animation-name: moveIn;
+  animation-duration: 5s;
+  animation-name: moveIn;
+  }
+}
