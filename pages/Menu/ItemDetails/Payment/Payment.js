@@ -42,7 +42,7 @@ const [regToken, setRegToken] = useState("");
       
         return currentTime;
       }
-    function createOrder(regToken){
+    function createOrder(){
         const db = getDatabase();
       
         const newPostKey = push(child(ref(db), 'orders')).key;
@@ -57,7 +57,7 @@ const [regToken, setRegToken] = useState("");
              if (snapshot.exists()) {
                var item = snapshot.val();
                var itemName = item.itemName;  
-               updates['/orders/' + newPostKey] = {itemName: itemName, code: code, item: id, customerEmail: email, customerName: name, timestamp: getCurrentTimeIn12HourFormat(), status: 0, phoneNumber: phoneNumberTo, regToken: regToken };
+               updates['/orders/' + newPostKey] = {itemName: itemName, code: code, item: id, customerEmail: email, customerName: name, timestamp: getCurrentTimeIn12HourFormat(), status: 0, phoneNumber: phoneNumberTo, regToken: '' };
                update(ref(db), updates);                 
              } 
            }).catch((error) => {
