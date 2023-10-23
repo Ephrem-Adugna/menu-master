@@ -189,7 +189,6 @@ if (status === "authenticated" && isAdmin) {
 if(status === "authenticated" && orderId){
     return (
         <>
-        <NotificationButtonFirebase orderId={orderId}></NotificationButtonFirebase>
           <div className={styles.nav} onClick={()=>{window.location.href="/"}}>
 <Image src={icon}></Image>
 <span className={styles.navTitle}>Menu Master</span>
@@ -198,6 +197,8 @@ if(status === "authenticated" && orderId){
         <span className={styles.codeTitle}>Your Code is:</span>
         <span className={styles.code}>{order.code}</span>
         <span className={styles.status}>Order Status: {["Pending", "Ready"][order.status]}</span>
+        <NotificationButtonFirebase orderId={orderId}></NotificationButtonFirebase>
+        
         </div>
         </>
       )   
