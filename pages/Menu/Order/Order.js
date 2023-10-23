@@ -52,7 +52,7 @@ export default function Order() {
                   
                 }
                 else{
-router.push('/')
+setOrder([])
                 }
               });
           }, 2000)
@@ -105,7 +105,15 @@ router.push('/')
   }).catch((error) => {
     console.error(error);
   });
-    }, []);
+    }, [session]);
+    function closeOrder(id, order){
+    const db = getDatabase();
+
+      const updates = {};
+      updates['/orders/' + id] = {};
+      update(ref(db), updates); 
+      alert("Order Closed")
+    }
     function sendOrderDone(code, number, name, regToken){
       sendMail(number, `Your order for ${name} is done! Code: ${code}`, "Menu Master", regToken).then(response=>{
        if( response.data.success)
@@ -163,7 +171,7 @@ if (status === "authenticated" && isAdmin) {
                     <td>{order.code}</td>
                     <td>{order.timestamp}</td>
                     <td onClick={()=>{sendOrderDone(order.code, order.phoneNumber, order.itemName, order.regToken)}}><Image className={styles.sendDoneButton} width={50} height={75} src={checkMark}></Image></td>
-                    <td ><Image className={styles.sendDoneButton} width={50} height={75} src={checkMark}></Image></td>
+                    <td ><Image onClick={()=>{closeOrder(Object.keys(orders)[id], order)}} className={styles.sendDoneButton} width={50} height={75} src={checkMark}></Image></td>
                 </tr>
                 
                 ))}
