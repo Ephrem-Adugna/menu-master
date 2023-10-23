@@ -1,6 +1,6 @@
 {
     "name": "Menu Master",
-    "short_name": "App",
+    "short_name": "Menu Master",
     "icons": [
       {
         "src": "/pwaicon.png",
