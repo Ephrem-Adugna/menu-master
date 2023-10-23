@@ -114,7 +114,12 @@ setOrder([])
       update(ref(db), updates); 
       alert("Order Closed")
     }
-    function sendOrderDone(code, number, name, regToken){
+    function sendOrderDone(code, number, name, regToken, order, id){
+      const db = getDatabase();
+
+      const updates = {};
+      updates['/orders/' + id] = {...order, status:1};
+      update(ref(db), updates); 
       sendMail(number, `Your order for ${name} is done! Code: ${code}`, "Menu Master", regToken).then(response=>{
        if( response.data.success)
        {
@@ -170,7 +175,7 @@ if (status === "authenticated" && isAdmin) {
                     <td>{order.itemName}</td>
                     <td>{order.code}</td>
                     <td>{order.timestamp}</td>
-                    <td onClick={()=>{sendOrderDone(order.code, order.phoneNumber, order.itemName, order.regToken)}}><Image className={styles.sendDoneButton} width={50} height={75} src={checkMark}></Image></td>
+                    <td onClick={()=>{sendOrderDone(order.code, order.phoneNumber, order.itemName, order.regToken, order, Object.keys(orders)[id])}}><Image className={styles.sendDoneButton} width={50} height={75} src={checkMark}></Image></td>
                     <td ><Image onClick={()=>{closeOrder(Object.keys(orders)[id], order)}} className={styles.sendDoneButton} width={50} height={75} src={checkMark}></Image></td>
                 </tr>
                 
