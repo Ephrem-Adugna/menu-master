@@ -52,7 +52,8 @@ export default function Order() {
                   
                 }
                 else{
-setOrder([])
+router.push('/')
+                  
                 }
               });
           }, 2000)
@@ -87,7 +88,12 @@ setOrder([])
             var orders = snapshot.val();
             setOrders(orders);
 
-            }});
+            }
+            else{
+            setOrders([]);
+
+            }
+          });
          },2000)
         
         }
