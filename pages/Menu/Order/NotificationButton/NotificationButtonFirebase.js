@@ -47,7 +47,7 @@ const NotificationButtonFirebase = ({orderId}) => {
       );
     }
    return(
-    <button onClick={()=>{requestPermission()}} style={{fontFamily: 40}}>Allow Notifications</button>
+    <button onClick={()=>{requestPermission()}} style={{fontSize: 40, display:'block'}}>Allow Notifications</button>
    )
 
  
