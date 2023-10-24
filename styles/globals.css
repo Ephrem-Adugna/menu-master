@@ -42,3 +42,29 @@ html, body{
   animation-name: moveIn;
   }
 }
+.downloadVideo{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  max-height: 100%;
+}
+@keyframes notification {
+  from {top:-20%}
+  to {top: 0%;}
+}
+.noPWANotifier{
+  position: fixed;
+  right: -10%;
+  right: 0;
+  background-color: white;
+  font-family: "Quicksand";
+  width: 250px;
+  padding: 10px;
+  box-shadow: 0px 0px 6px 0px rgb(0 0 0 / 75%);
+  border-radius: 5px;
+  animation-name: notification;
+  animation-duration: 1s;
+}
+.noPWANotifier:hover{
+  cursor: pointer;
+}

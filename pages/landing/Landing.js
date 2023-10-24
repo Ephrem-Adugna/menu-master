@@ -1,13 +1,14 @@
 import styles from './Landing.module.css';
 import { useRouter } from 'next/navigation'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSession } from "next-auth/react"
 import Image from 'next/image';
 import googleIcon from '../../assets/googleIcon.png'
 import Menu from '../Menu/Menu';
 const Landing = () => {
   const router = useRouter()
-  const { data: session, status } = useSession()
+  const { data: session, status } = useSession();
+
   if (status === "authenticated") {
     return(
       <Menu></Menu>
