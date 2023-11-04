@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getMessaging, getToken, onMessage  } from "firebase/messaging";
+import { RingLoader } from 'react-spinners';
 
 import {
     PayPalScriptProvider,
@@ -23,7 +24,7 @@ const [phoneNumberDone, setPhoneNumberDone] = useState(false);
 const [error, setErorr] = useState(false);
 const [phoneNumber, setPhoneNumber] = useState("");
 const [phoneNumberTo, setPhoneNumberTo] = useState("");
-const [regToken, setRegToken] = useState("");
+const [loading, setLoading] = useState(false);
 
     function getCurrentTimeIn12HourFormat() {
         const now = new Date();
@@ -134,7 +135,16 @@ validatePhoneNumber(phoneNumber).then(response=>{
         <form onSubmit={verifyPhoneNumber}>
         <label className={styles.phoneNumberTitle}>Enter your Phone Number</label>
         <input value={phoneNumber} onChange={(e)=>{setPhoneNumber(e.nativeEvent.target.value)}} minLength={10} required className={styles.phoneNumberInput}type={"number"} placeholder="Phone Number"/>
-        <input type={"submit"} value={"Save"}   className={styles.saveButton}/>
+        <button type={"submit"} className={styles.saveButton}>
+            {!loading &&'Save'}
+            {loading && <RingLoader
+                        color={"#ffffff"}
+                        loading={true}
+                        size={30}
+                        aria-label="Loading Spinner"
+                        data-testid="loader"
+                        className='loader'
+                    />}        </button>
       {error && <span className={styles.phoneNumberError} >Please use a valid phone number</span>}        </form>
         </>
     )
