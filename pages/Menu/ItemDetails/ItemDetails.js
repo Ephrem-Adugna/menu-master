@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react"
 import Image from 'next/image';
 import { getDatabase, ref, onValue, get, child } from "firebase/database";
 import Payment from './Payment/Payment';
+import ShopifyPayment from './Payment/ShopifyPayment';
 
 
 const ItemDetails = (props) => {
@@ -32,6 +33,14 @@ function getItemDetails(){
 }
 
 useEffect(() => {
+  if (localStorage.checkout) {
+    fetchCheckout(localStorage.checkout).then(c=>{
+      console.log(c.webUrl)
+    });
+
+    } else {
+      createCheckout();
+    }
   if(!props){
     props.goToMenu();
   }
@@ -45,7 +54,7 @@ if(itemDetails){
   { 
   <div className={`${styles.paymentAlert} ${alertActive && styles.visible}`}>
 <span className={styles.cancelButton} onClick={()=>{setAlertActive(false);}}>X</span>
-
+<ShopifyPayment></ShopifyPayment>
 <span className={styles.placeOrderTitle}>Place Order</span>
 <Payment  cost={itemDetails.itemPrice} itemId={props?.id} email={session?.user?.email} name={session?.user?.name}></Payment>
 
