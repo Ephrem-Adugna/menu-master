@@ -62,3 +62,10 @@
     display: block;
     font-family: 'Quicksand';
 }
+.checkout{
+    width: 80vw;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}

@@ -26,16 +26,57 @@ const Menu = () => {
 useEffect(() => {
   if (localStorage.checkout) {
     fetchCheckout(localStorage.checkout).then(c=>{
-      console.log(c.webUrl)
+      if(!c || c.completedAt){
+        createCheckout();
+
+      }
     });
+    
+  }
+  else{
+    createCheckout();
 
-    } else {
-      createCheckout();
-    }
-    fetchAllProducts().then(items=>{
-      setMenuItems(items);
+  }
 
-    })    
+      const dbRef = ref(getDatabase());
+      get(child(dbRef, `admins`)).then((snapshot) => {
+        if (snapshot.exists()) {
+          var admins = snapshot.val();
+          var isAdmin = false;
+          Object.values(admins).forEach(admin=>{
+            if(session.user.email === admin.email){
+              setIsAdmin(true);
+              isAdmin = true;
+            }
+            else{
+              get(child(dbRef, `orders`)).then((snapshot) => {
+                if (snapshot.exists()) {
+                  var orders = snapshot.val();
+                  Object.values(orders).forEach((order, i)=>{
+                  if(order.customerEmail === session.user.email){
+                    const index = Object.keys(orders)[i];
+                    sessionStorage.setItem("order",index );
+                    
+                    router.push("/Menu/Order/Order")
+                  return;
+                  }
+                  })
+                } 
+              }).catch((error) => {
+                console.error(error);
+              });        }
+          });
+          fetchAllProducts().then(items=>{
+            setMenuItems(items);
+      
+          });
+    
+        } 
+      }).catch((error) => {
+        console.error(error);
+      });
+     
+   
   
 }, []);
 function goToItemDetails(id){
