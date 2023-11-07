@@ -14,6 +14,7 @@ const Menu = () => {
   const [menuItems, setMenuItems] = useState([]);
   const [onMenu, setOnMenu] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [selectedId, setSelectedId] = useState();
   const router = useRouter()
 
@@ -48,24 +49,24 @@ useEffect(() => {
               setIsAdmin(true);
               isAdmin = true;
             }
-            else{
-              get(child(dbRef, `orders`)).then((snapshot) => {
-                if (snapshot.exists()) {
-                  var orders = snapshot.val();
-                  Object.values(orders).forEach((order, i)=>{
-                  if(order.customerEmail === session.user.email){
-                    const index = Object.keys(orders)[i];
-                    sessionStorage.setItem("order",index );
-                    
-                    router.push("/Menu/Order/Order")
-                  return;
-                  }
-                  })
-                } 
-              }).catch((error) => {
-                console.error(error);
-              });        }
           });
+          get(child(dbRef, `orders`)).then((snapshot) => {
+            if (snapshot.exists()) {
+              var orders = snapshot.val();
+           
+              Object.values(orders).forEach((order, i)=>{
+              if(order.customerEmail === session.user.email){
+                const index = Object.keys(orders)[i];
+                sessionStorage.setItem("order",index );
+                
+                router.push("/Menu/Order/Order")
+              return;
+              }
+              })
+            } 
+          }).catch((error) => {
+            console.error(error);
+          });    
           fetchAllProducts().then(items=>{
             setMenuItems(items);
       
@@ -75,7 +76,13 @@ useEffect(() => {
       }).catch((error) => {
         console.error(error);
       });
-     
+      get(child(dbRef, `storeSettings`)).then((snapshot) => {
+        if (snapshot.exists()) {
+          var storeSettings = snapshot.val();
+          setMenuOpen(storeSettings.open);
+        }
+        
+      });
    
   
 }, []);
@@ -101,7 +108,7 @@ function goToMenu(){
 }
   {Object.values(menuItems).map((menuItem, id)=>  (
     
-<div key={id} className={`${styles.menuItem}`} onClick={()=>{if(!isAdmin){goToItemDetails(menuItem?.variants[0]?.id)}}}>
+<div key={id} className={`${styles.menuItem} ${!menuOpen && styles.disabled}`} onClick={()=>{if(!isAdmin && menuOpen){goToItemDetails(menuItem?.variants[0]?.id)}}}>
 <Image className={styles.itemImage} src={menuItem?.images?.length && menuItem.images[0]?.src.split("?")[0]} width={100} height={150} alt='foodimg'/>
 <span className={styles.itemName}>{menuItem.title}</span>
 
