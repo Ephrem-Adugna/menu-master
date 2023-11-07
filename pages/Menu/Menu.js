@@ -93,6 +93,12 @@ function goToMenu(){
     return (
   <>{onMenu &&
   <div className={styles.menuItemsContainer}>
+     {
+  isAdmin&& <div className={`${styles.menuItem}`} onClick={()=>{router.push('/Menu/Order/Order')}}>
+  <Image className={styles.itemImage} src={OrderBtn} width={100} height={150} alt='add an item'/>
+  <span className={styles.itemName}>Begin Taking Orders</span>
+  </div>
+}
   {Object.values(menuItems).map((menuItem, id)=>  (
     
 <div key={id} className={`${styles.menuItem}`} onClick={()=>{if(!isAdmin){goToItemDetails(menuItem?.variants[0]?.id)}}}>
@@ -102,12 +108,7 @@ function goToMenu(){
 <span className={styles.itemPrice}>{menuItem?.variants?.length &&formatter.format(menuItem?.variants[0]?.price.amount)}</span>
 </div>
 ))}
-{
-  isAdmin&& <div className={`${styles.menuItem}`} onClick={()=>{router.push('/Menu/Order/Order')}}>
-  <Image className={styles.itemImage} src={OrderBtn} width={100} height={150} alt='add an item'/>
-  <span className={styles.itemName}>Begin Taking Orders</span>
-  </div>
-}
+
 
 
 </div>}
