@@ -13,7 +13,7 @@
     margin-top: 10%;
     width: 170px;
     margin-bottom: 10px;
-
+position: relative;
 }
 .menuItem:hover{
     cursor: pointer;
@@ -68,4 +68,15 @@
    top: 50%;
    left: 50%;
    transform: translate(-50%, -50%);
+}
+.toggleBtn{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+   
+}
+.placeholder{
+    height: 150px;
+    width: 100px;
 }

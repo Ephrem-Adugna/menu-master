@@ -3,12 +3,12 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react';
 import { useSession } from "next-auth/react"
 import Image from 'next/image';
-import { getDatabase, ref, onValue, get, child, set } from "firebase/database";
+import { getDatabase, ref, onValue, get, child, set, update } from "firebase/database";
 import ItemDetails from './ItemDetails/ItemDetails';
 import AddBtn from '../../assets/addBtn.png';
 import OrderBtn from '../../assets/takeOrder.png';
 import { addItemToCheckout, createCheckout, fetchAllProducts, fetchCheckout } from "@/services/shopifyProvider";
-
+import ToggleButton from "react-toggle-button"
 const Menu = () => {
   const { data: session, status } = useSession();
   const [menuItems, setMenuItems] = useState([]);
@@ -23,8 +23,7 @@ const Menu = () => {
     currency: 'USD',
 });
 
-
-useEffect(() => {
+function getData(){
   if (localStorage.checkout) {
     fetchCheckout(localStorage.checkout).then(c=>{
       if(!c || c.completedAt){
@@ -84,6 +83,9 @@ useEffect(() => {
         
       });
    
+}
+useEffect(() => {
+getData();
   
 }, []);
 function goToItemDetails(id){
@@ -91,6 +93,14 @@ function goToItemDetails(id){
     router.push(done.webUrl);
    })
 
+}
+function toggleMenu(value){
+  const db = getDatabase();
+
+  const updates = {};
+  updates['/storeSettings/open'] = value;
+  update(ref(db), updates);
+  getData();
 }
 function goToMenu(){
   setOnMenu(true); 
@@ -104,6 +114,20 @@ function goToMenu(){
   isAdmin&& <div className={`${styles.menuItem}`} onClick={()=>{router.push('/Menu/Order/Order')}}>
   <Image className={styles.itemImage} src={OrderBtn} width={100} height={150} alt='add an item'/>
   <span className={styles.itemName}>Begin Taking Orders</span>
+  </div>
+}
+{
+  isAdmin&& <div className={`${styles.menuItem}`}>
+  <div className={styles.placeholder}  alt='add an item'></div>
+   
+   <span className={`${styles.toggleBtn}`}><ToggleButton
+              value={menuOpen || false}
+              
+              onToggle={(value) => {
+                toggleMenu(!value);
+              }} />
+              </span>
+  <span className={styles.itemName}>Accepting Orders</span>
   </div>
 }
   {Object.values(menuItems).map((menuItem, id)=>  (
