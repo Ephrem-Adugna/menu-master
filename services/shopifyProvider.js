@@ -1,10 +1,14 @@
 import { useEffect } from 'react';
 import Client from 'shopify-buy';
 
+// const client = Client.buildClient({
+//   storefrontAccessToken: "f221c3b5b694c54040e0fb01f55edcf8",
+//   domain: "sbhsmenu.myshopify.com",
+// });
 const client = Client.buildClient({
-    storefrontAccessToken: "f221c3b5b694c54040e0fb01f55edcf8",
-    domain: "sbhsmenu.myshopify.com",
-  });
+  storefrontAccessToken: process.env.NEXT_PUBLIC_SHOPIFY_KEY,
+  domain: process.env.NEXT_PUBLIC_SHOPIFY_STORE,
+});
  
  
   export const createCheckout = async () => {

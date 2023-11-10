@@ -24,19 +24,10 @@ const Menu = () => {
 });
 
 function getData(){
-  if (localStorage.checkout) {
-    fetchCheckout(localStorage.checkout).then(c=>{
-      if(!c || c.completedAt){
+
         createCheckout();
 
-      }
-    });
-    
-  }
-  else{
-    createCheckout();
-
-  }
+  
 
       const dbRef = ref(getDatabase());
       get(child(dbRef, `admins`)).then((snapshot) => {
