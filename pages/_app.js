@@ -32,7 +32,11 @@ setVidDone(true)
    }
    {!vidDone &&
 <Image className='splashImg' src={iconImg}></Image>
+
    }
+   {!vidDone &&
+   <span className='attribution'>Endorsed By <br></br>Ephrem Adugna</span>
+}
       <div style={{visibility: `${!vidDone && 'hidden' || 'visible'}`}}>
    <SessionProvider session={pageProps.session}>
     <Component {...pageProps} />

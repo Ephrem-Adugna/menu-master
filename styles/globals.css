@@ -68,3 +68,17 @@ html, body{
 .noPWANotifier:hover{
   cursor: pointer;
 }
+.attribution{
+  font-family: "Quicksand";
+  font-weight: 500;
+  font-size: 35px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: block;
+  text-align: center;
+  background-color: rgb(193, 220, 255);
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
