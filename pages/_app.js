@@ -35,7 +35,7 @@ setVidDone(true)
 
    }
    {!vidDone &&
-   <span className='attribution'>Endorsed By <br></br>Ephrem Adugna</span>
+   <span className='attribution'>Developed By <br></br>Ephrem Adugna</span>
 }
       <div style={{visibility: `${!vidDone && 'hidden' || 'visible'}`}}>
    <SessionProvider session={pageProps.session}>
