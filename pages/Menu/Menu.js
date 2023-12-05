@@ -7,7 +7,7 @@ import { getDatabase, ref, onValue, get, child, set, update } from "firebase/dat
 import ItemDetails from './ItemDetails/ItemDetails';
 import AddBtn from '../../assets/addBtn.png';
 import OrderBtn from '../../assets/takeOrder.png';
-import { addItemToCheckout, createCheckout, fetchAllProducts, fetchCheckout } from "@/services/shopifyProvider";
+import { addEmailToCheckout, addItemToCheckout, createCheckout, fetchAllProducts, fetchCheckout } from "@/services/shopifyProvider";
 import ToggleButton from "react-toggle-button"
 const Menu = () => {
   const { data: session, status } = useSession();
@@ -81,6 +81,7 @@ getData();
 }, []);
 function goToItemDetails(id){
    addItemToCheckout(id, 1).then(done=>{
+    addEmailToCheckout(session.user.email);
     router.push(done.webUrl);
    })
 

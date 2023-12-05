@@ -30,7 +30,11 @@ const client = Client.buildClient({
       .catch((err) => console.log(err));
       return checkout;
   };
-
+export const addEmailToCheckout = async(email)=>{
+  const checkout = await client.checkout;
+  var checkoutId = localStorage.getItem("checkout");
+  checkout.updateEmail(checkoutId, email);
+}
   export const addItemToCheckout = async (variantId, quantity) => {
     const lineItemsToAdd = [
       {
