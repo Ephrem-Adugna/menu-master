@@ -82,8 +82,8 @@ router.push('/')
             setOrders(orders);
 
             }});
-          setInterval(()=>{
-          get(child(dbRef, `orders`)).then((snapshot) => {
+            const ordersRef = ref(db, 'orders');
+            onValue(ordersRef, (snapshot) => {
             if (snapshot.exists()) {
             var orders = snapshot.val();
             setOrders(orders);
@@ -94,7 +94,6 @@ router.push('/')
 
             }
           });
-         },2000)
         
         }
         else{
@@ -177,7 +176,7 @@ if (status === "authenticated" && isAdmin) {
             </thead>
             <tbody>
               {Object.values(orders).map((order, id)=>  ( 
-                 <tr key={id}>
+                 <tr key={id} style={{color:(order.status == 1 && "green") }}>
                     <td>{order.itemName}</td>
                     <td>{order.code}</td>
                     <td>{order.timestamp}</td>

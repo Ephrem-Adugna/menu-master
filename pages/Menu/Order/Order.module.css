@@ -82,3 +82,6 @@ width: 100%;
   .sendDoneButton:hover{
 cursor: pointer;
   }
+  .doneOrder{
+    color: green;
+  }
